@@ -1,0 +1,162 @@
+[gd_scene load_steps=5 format=3 uid="uid://ruw6givpg80g"]
+
+[ext_resource type="Theme" uid="uid://bij6e3e1nns4d" path="res://resources/ui_theme.tres" id="1_u31mc"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_6sr3r"]
+[ext_resource type="FontFile" uid="uid://bcmn8vosiojkq" path="res://fonts/namecat/Namecat.ttf" id="3_kwk8c"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ysg73"]
+color = Color(0, 0, 0, 0)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u31mc")
+script = ExtResource("2_6sr3r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.537255, 0.6, 0.560784, 1)
+
+[node name="Login" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = -95.0
+offset_right = 107.5
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Login"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="BigText" type="Label" parent="Login/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kwk8c")
+theme_override_font_sizes/font_size = 72
+text = "CHICKEN RUN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Login/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="MarginContainer" type="MarginContainer" parent="Login/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Login/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Name" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "name"
+alignment = 1
+
+[node name="GameCode" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "game code"
+alignment = 1
+
+[node name="WebsocketURL" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "ws://localhost:9080"
+placeholder_text = "server url"
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Login/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Login/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Create" type="Button" parent="Login/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CREATE"
+
+[node name="Join" type="Button" parent="Login/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "JOIN"
+
+[node name="Settings" type="Button" parent="Login/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SETTINGS"
+
+[node name="Lobby" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -28.5
+offset_right = 46.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby"]
+layout_mode = 2
+
+[node name="LobbyCode" type="Label" parent="Lobby/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kwk8c")
+theme_override_font_sizes/font_size = 72
+text = "game: 1234"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Lobby/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="ItemList" type="ItemList" parent="Lobby/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+auto_height = true
+icon_scale = 0.15
+
+[node name="HSeparator2" type="HSeparator" parent="Lobby/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="StartGame" type="Button" parent="Lobby/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "START GAME"
+
+[connection signal="pressed" from="Login/VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="pressed" from="Login/VBoxContainer/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="item_clicked" from="Lobby/VBoxContainer/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="Lobby/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
