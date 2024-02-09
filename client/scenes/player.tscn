@@ -23,12 +23,12 @@ collision_mask = 3
 script = ExtResource("1_o5q7c")
 
 [node name="Chicken" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(0, -3.135)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("2_iqfxx")
 
 [node name="Dog" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -5.89)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_w3v4s")

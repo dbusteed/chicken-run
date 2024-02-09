@@ -3,7 +3,7 @@
 // that they need an Internet connection to run the project if desired.
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
-const CACHE_VERSION = "1707507401|1342212405";
+const CACHE_VERSION = "1707509106|693903684";
 const CACHE_PREFIX = "Chicken Run-sw-cache-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const OFFLINE_URL = "index.offline.html";
