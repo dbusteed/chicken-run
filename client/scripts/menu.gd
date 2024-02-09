@@ -97,7 +97,7 @@ func _on_start_game_pressed():
 func setup_game():
 	#
 	# everyone needs to create the game
-	#
+	#	
 	var game_scene = load("res://scenes/game.tscn")
 	var game = game_scene.instantiate()
 	get_tree().root.add_child(game)
