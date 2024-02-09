@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://yr1nmpv5no11"]
 
-[ext_resource type="Texture2D" uid="uid://diata1vou5wky" path="res://textures/spritesheet_tiles.png" id="1_o6hrn"]
+[ext_resource type="Texture2D" uid="uid://bax8n466pbb4m" path="res://textures/spritesheet_tiles.png" id="1_o6hrn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5nsmf"]
 friction = 0.15

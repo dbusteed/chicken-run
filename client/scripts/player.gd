@@ -10,8 +10,8 @@ func _enter_tree():
 func init(pos, it):
 	global_position = pos
 	if it:
-		$Chicken.hide()
-		$Dog.show()
+		$Chicken.show()
+		$Dog.hide()
 	
 
 func get_input():
