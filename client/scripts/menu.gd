@@ -98,7 +98,7 @@ func setup_game():
 	for pid in players:
 		if players[pid]['it']:
 			if pid == multiplayer.get_unique_id():
-				game.get_node("Camera2D").zoom = Vector2(0.5, 0.5)
+				game.get_node("Camera2D").zoom = Vector2(0.4, 0.4)
 	
 	#
 	# then let the host create the players (which will
