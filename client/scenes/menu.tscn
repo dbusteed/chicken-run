@@ -73,7 +73,6 @@ alignment = 1
 [node name="GameCode" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "a"
 placeholder_text = "game code"
 alignment = 1
 
