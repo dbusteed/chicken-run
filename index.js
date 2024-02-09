@@ -658,7 +658,7 @@ function createExportWrapper(name) {
 // include: runtime_exceptions.js
 // end include: runtime_exceptions.js
 var wasmBinaryFile;
-  wasmBinaryFile = 'godot.web.template_release.wasm32.nothreads.wasm';
+  wasmBinaryFile = 'godot.web.template_debug.wasm32.nothreads.wasm';
   if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
   }
@@ -14109,6 +14109,7 @@ var dynCall_jiiiiiiiiii = Module['dynCall_jiiiiiiiiii'] = createExportWrapper('d
 var dynCall_jiiiiii = Module['dynCall_jiiiiii'] = createExportWrapper('dynCall_jiiiiii');
 var dynCall_jiiiiiiii = Module['dynCall_jiiiiiiii'] = createExportWrapper('dynCall_jiiiiiiii');
 var dynCall_jii = Module['dynCall_jii'] = createExportWrapper('dynCall_jii');
+var dynCall_iiiij = Module['dynCall_iiiij'] = createExportWrapper('dynCall_iiiij');
 var dynCall_viiij = Module['dynCall_viiij'] = createExportWrapper('dynCall_viiij');
 var dynCall_viiiiiiij = Module['dynCall_viiiiiiij'] = createExportWrapper('dynCall_viiiiiiij');
 var dynCall_jiji = Module['dynCall_jiji'] = createExportWrapper('dynCall_jiji');
@@ -14123,7 +14124,6 @@ var dynCall_viiiiifiiiijjii = Module['dynCall_viiiiifiiiijjii'] = createExportWr
 var dynCall_vijiiii = Module['dynCall_vijiiii'] = createExportWrapper('dynCall_vijiiii');
 var dynCall_viijiiiiiiiii = Module['dynCall_viijiiiiiiiii'] = createExportWrapper('dynCall_viijiiiiiiiii');
 var dynCall_viiiiiji = Module['dynCall_viiiiiji'] = createExportWrapper('dynCall_viiiiiji');
-var dynCall_vijiiiiiidddd = Module['dynCall_vijiiiiiidddd'] = createExportWrapper('dynCall_vijiiiiiidddd');
 var dynCall_vijj = Module['dynCall_vijj'] = createExportWrapper('dynCall_vijj');
 var dynCall_jijiiiiifiii = Module['dynCall_jijiiiiifiii'] = createExportWrapper('dynCall_jijiiiiifiii');
 var dynCall_iijiiij = Module['dynCall_iijiiij'] = createExportWrapper('dynCall_iijiiij');
@@ -14131,6 +14131,7 @@ var dynCall_iijiij = Module['dynCall_iijiij'] = createExportWrapper('dynCall_iij
 var dynCall_iijjiiiiiiij = Module['dynCall_iijjiiiiiiij'] = createExportWrapper('dynCall_iijjiiiiiiij');
 var dynCall_iijiiiiij = Module['dynCall_iijiiiiij'] = createExportWrapper('dynCall_iijiiiiij');
 var dynCall_iijjj = Module['dynCall_iijjj'] = createExportWrapper('dynCall_iijjj');
+var dynCall_vijiiiiiidddd = Module['dynCall_vijiiiiiidddd'] = createExportWrapper('dynCall_vijiiiiiidddd');
 var dynCall_jiiii = Module['dynCall_jiiii'] = createExportWrapper('dynCall_jiiii');
 var dynCall_jiijiiii = Module['dynCall_jiijiiii'] = createExportWrapper('dynCall_jiijiiii');
 var dynCall_jiiiijjjjjj = Module['dynCall_jiiiijjjjjj'] = createExportWrapper('dynCall_jiiiijjjjjj');
@@ -14177,7 +14178,6 @@ var dynCall_vijdddd = Module['dynCall_vijdddd'] = createExportWrapper('dynCall_v
 var dynCall_vijififi = Module['dynCall_vijififi'] = createExportWrapper('dynCall_vijififi');
 var dynCall_iijji = Module['dynCall_iijji'] = createExportWrapper('dynCall_iijji');
 var dynCall_viijj = Module['dynCall_viijj'] = createExportWrapper('dynCall_viijj');
-var dynCall_iiiij = Module['dynCall_iiiij'] = createExportWrapper('dynCall_iiiij');
 var dynCall_dij = Module['dynCall_dij'] = createExportWrapper('dynCall_dij');
 var dynCall_vijd = Module['dynCall_vijd'] = createExportWrapper('dynCall_vijd');
 var dynCall_viijiiii = Module['dynCall_viijiiii'] = createExportWrapper('dynCall_viijiiii');
