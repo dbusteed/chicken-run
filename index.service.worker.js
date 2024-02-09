@@ -3,7 +3,7 @@
 // that they need an Internet connection to run the project if desired.
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
-const CACHE_VERSION = "1707410600|8097192265";
+const CACHE_VERSION = "1707492560|1428536826";
 const CACHE_PREFIX = "Chicken Run-sw-cache-";
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 const OFFLINE_URL = "index.offline.html";
@@ -22,7 +22,7 @@ self.addEventListener("activate", (event) => {
 		function (keys) {
 			// Remove old caches.
 			return Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX) && key != CACHE_NAME).map(key => caches.delete(key)));
-		}).then(function() {
+		}).then(function () {
 			// Enable navigation preload if available.
 			return ("navigationPreload" in self.registration) ? self.registration.navigationPreload.enable() : Promise.resolve();
 		})
