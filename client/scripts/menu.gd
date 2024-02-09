@@ -8,6 +8,10 @@ var players = {}
 
 func _ready():
 	randomize()
+	$Login/VBoxContainer/HBoxContainer/Create.disabled = true
+	$Login.show()
+	$Lobby.hide()
+	
 	var random_names = [
 		"Alice",
 		"Bob",
@@ -20,16 +24,21 @@ func _ready():
 	]
 	
 	player_name.text = random_names.pick_random()
-	
 	Network.lobby_joined.connect(lobby_joined)
-	#Network.say_hi.connect(say_hi)
+
+
+func _input(_event):
+	var inputs = [
+		player_name.text == '',
+		game_code.text == '',
+		ws_url.text == '',
+	]
+	
+	# if any of the three inputs are blank, disable the button
+	$Login/VBoxContainer/HBoxContainer/Create.disabled = inputs.max()
 
 
 func _on_create_pressed():
-	Network.start(ws_url.text, game_code.text, true)
-
-
-func _on_join_pressed():
 	Network.start(ws_url.text, game_code.text, true)
 
 
@@ -100,23 +109,22 @@ func setup_game():
 			if pid == multiplayer.get_unique_id():
 				game.get_node("Camera2D").zoom = Vector2(0.4, 0.4)
 	
-	#
-	# then let the host create the players (which will
-	# be replicated via Spawner)
-	#
 	if multiplayer.get_unique_id() == 1:
-		print(players)
+		#print(players)
 		var player_scene = load("res://scenes/player.tscn")
 		for pid in players:
 			
 			# TODO notitspawns need to pop or something to avoid dups
-			
 			var player = player_scene.instantiate()
 			player.name = str(pid)
-			player.it = players[pid]['it']
-			var spawn = 'ItSpawns' if player.it else 'NotItSpawns'
+			var it = players[pid]['it']
+			var spawn = 'ItSpawns' if it else 'NotItSpawns'
 			get_tree().get_root().get_node("/root/Game/Players").add_child(player, true)
-			player.init.rpc(game.get_node(spawn).get_children().pick_random().global_position)
+			player.init.rpc_id(
+				pid,
+				game.get_node(spawn).get_children().pick_random().global_position,
+				it,
+			)
 			game.setup_camera.rpc_id(pid)
 
 

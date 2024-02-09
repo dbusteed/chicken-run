@@ -201,10 +201,9 @@ func _disconnected():
 
 
 func _peer_connected(id):
-	print("%d connected to %d" %[id, multiplayer.get_unique_id()])
+	#print("%d connected to %d" %[id, multiplayer.get_unique_id()])
 	_create_peer(id)
 	say_hi.emit(id)
-	#set_multiplayer_authority(id)
 	
 
 

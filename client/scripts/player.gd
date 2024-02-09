@@ -1,14 +1,13 @@
 extends CharacterBody2D
 
 @export var speed = 300
-var it := false
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int(), true)
 
 
 @rpc("call_local", "any_peer")
-func init(pos):
+func init(pos, it):
 	global_position = pos
 	if it:
 		$Chicken.show()

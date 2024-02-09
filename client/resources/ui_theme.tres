@@ -1,6 +1,20 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bij6e3e1nns4d"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bij6e3e1nns4d"]
 
 [ext_resource type="FontFile" uid="uid://dbn5r4fk1avnx" path="res://fonts/eazy_chat/Eazy Chat.ttf" id="1_jmc0d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vefso"]
+border_width_bottom = 5
+border_color = Color(0.466667, 0.466667, 0.466667, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0.239216, 0.239216, 0.239216, 0.6)
+shadow_size = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lcg4c"]
 
@@ -51,6 +65,7 @@ shadow_size = 2
 
 [resource]
 default_font = ExtResource("1_jmc0d")
+Button/styles/disabled = SubResource("StyleBoxFlat_vefso")
 Button/styles/focus = SubResource("StyleBoxEmpty_lcg4c")
 Button/styles/hover = SubResource("StyleBoxFlat_27qmm")
 Button/styles/normal = SubResource("StyleBoxFlat_wdfgi")

@@ -144,8 +144,7 @@ class Lobby {
 		this.peers.forEach((p) => {
 			p.ws.send(ProtoMessage(CMD.SEAL, 0));
 		});
-		console.log(`Peer ${peer.id} sealed lobby ${this.name} `
-			+ `with ${this.peers.length} peers`);
+		console.log(`Peer ${peer.id} sealed lobby ${this.name} with ${this.peers.length} peers`);
 		this.closeTimer = setTimeout(() => {
 			// Close peer connection to host (and thus the lobby)
 			this.peers.forEach((p) => {
@@ -160,7 +159,24 @@ let peersCount = 0;
 
 function joinLobby(peer, pLobby, mesh) {
 	let lobbyName = pLobby;
-	if (lobbyName === '') {
+	
+	// if (lobbyName === '') {
+	// 	if (lobbies.size >= MAX_LOBBIES) {
+	// 		throw new ProtoError(4000, STR_TOO_MANY_LOBBIES);
+	// 	}
+	// 	// Peer must not already be in a lobby
+	// 	if (peer.lobby !== '') {
+	// 		throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
+	// 	}
+	// 	lobbyName = randomSecret();
+	// 	lobbies.set(lobbyName, new Lobby(lobbyName, peer.id, mesh));
+	// 	console.log(`Peer ${peer.id} created lobby ${lobbyName}`);
+	// 	console.log(`Open lobbies: ${lobbies.size}`);
+	// }
+
+	let lobby = lobbies.get(lobbyName);
+	if (!lobby) {
+		// throw new ProtoError(4000, STR_LOBBY_DOES_NOT_EXISTS);
 		if (lobbies.size >= MAX_LOBBIES) {
 			throw new ProtoError(4000, STR_TOO_MANY_LOBBIES);
 		}
@@ -168,21 +184,17 @@ function joinLobby(peer, pLobby, mesh) {
 		if (peer.lobby !== '') {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
-		lobbyName = randomSecret();
+		// lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id, mesh));
 		console.log(`Peer ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
-	}
-	const lobby = lobbies.get(lobbyName);
-	if (!lobby) {
-		throw new ProtoError(4000, STR_LOBBY_DOES_NOT_EXISTS);
+		lobby = lobbies.get(lobbyName);
 	}
 	if (lobby.sealed) {
 		throw new ProtoError(4000, STR_LOBBY_IS_SEALED);
 	}
 	peer.lobby = lobbyName;
-	console.log(`Peer ${peer.id} joining lobby ${lobbyName} `
-		+ `with ${lobby.peers.length} peers`);
+	console.log(`Peer ${peer.id} joining lobby ${lobbyName} with ${lobby.peers.length} peers`);
 	lobby.join(peer);
 	peer.ws.send(ProtoMessage(CMD.JOIN, 0, lobbyName));
 }
@@ -255,7 +267,7 @@ wss.on('connection', (ws) => {
 	const id = randomId();
 	const peer = new Peer(id, ws);
 	ws.on('message', (message) => {
-		console.log(message)
+		console.log('> ', message)
 		if (typeof message !== 'string') {
 			ws.close(4000, STR_INVALID_TRANSFER_MODE);
 			return;
@@ -264,8 +276,7 @@ wss.on('connection', (ws) => {
 			parseMsg(peer, message);
 		} catch (e) {
 			const code = e.code || 4000;
-			console.log(`Error parsing message from ${id}:\n${
-				message}`);
+			console.log(`Error parsing message from ${id}:\n${message}`);
 			ws.close(code, e.message);
 		}
 	});
