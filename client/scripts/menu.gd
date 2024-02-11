@@ -20,7 +20,12 @@ func _ready():
 		"Eddy",
 		"Frank",
 		"Gary",
-		"Helen"
+		"Helen",
+		"Iggy",
+		"Jerry",
+		"Karen",
+		"Lisa",
+		"Marvin"
 	]
 	
 	player_name.text = random_names.pick_random()
@@ -111,6 +116,12 @@ func setup_game():
 	
 	if multiplayer.get_unique_id() == 1:
 		#print(players)
+		
+		var spawns = []
+		for spawn in game.get_node("NotItSpawns").get_children():
+			spawns.append(spawn.global_position)
+		spawns.shuffle()
+		
 		var player_scene = load("res://scenes/player.tscn")
 		for pid in players:
 			
@@ -118,13 +129,13 @@ func setup_game():
 			var player = player_scene.instantiate()
 			player.name = str(pid)
 			var it = players[pid]['it']
-			var spawn = 'ItSpawns' if it else 'NotItSpawns'
+			var spawn
+			if it:
+				spawn = game.get_node("ItSpawns").get_children().pick_random().global_position
+			else:
+				spawn = spawns.pop_front()
 			get_tree().get_root().get_node("/root/Game/Players").add_child(player, true)
-			player.init.rpc_id(
-				pid,
-				game.get_node(spawn).get_children().pick_random().global_position,
-				it,
-			)
+			player.init.rpc_id(pid, spawn, it)
 			game.setup_camera.rpc_id(pid)
 
 

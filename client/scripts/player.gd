@@ -13,6 +13,8 @@ func init(pos, it):
 		$Chicken.show()
 		$Dog.hide()
 	
+	await get_tree().create_timer(1.0).timeout
+	$MultiplayerSynchronizer.public_visibility = true
 
 func get_input():
 	if not is_multiplayer_authority(): return

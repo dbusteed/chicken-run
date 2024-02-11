@@ -22,7 +22,18 @@ signal offer_received(id, offer)
 signal answer_received(id, answer)
 signal candidate_received(id, mid, index, sdp)
 signal lobby_sealed()
-signal say_hi(id)
+
+
+func _init():
+	connected.connect(self._connected)
+	disconnected.connect(self._disconnected)
+	offer_received.connect(self._offer_received)
+	answer_received.connect(self._answer_received)
+	candidate_received.connect(self._candidate_received)
+	lobby_sealed.connect(self._lobby_sealed)
+	peer_connected.connect(self._peer_connected)
+	peer_disconnected.connect(self._peer_disconnected)
+
 
 func connect_to_url(url):
 	close()
@@ -125,20 +136,6 @@ func _send_msg(type: int, id: int, data:="") -> int:
 	}))
 
 
-func _init():
-	connected.connect(self._connected)
-	disconnected.connect(self._disconnected)
-
-	offer_received.connect(self._offer_received)
-	answer_received.connect(self._answer_received)
-	candidate_received.connect(self._candidate_received)
-
-	#lobby_joined.connect(self._lobby_joined)
-	lobby_sealed.connect(self._lobby_sealed)
-	peer_connected.connect(self._peer_connected)
-	peer_disconnected.connect(self._peer_disconnected)
-
-
 func start(url, lob = "", msh:=true):
 	stop()
 	sealed = false
@@ -212,9 +209,7 @@ func _disconnected():
 func _peer_connected(id):
 	#print("%d connected to %d" %[id, multiplayer.get_unique_id()])
 	_create_peer(id)
-	say_hi.emit(id)
 	
-
 
 func _peer_disconnected(id):
 	if rtc_mp.has_peer(id): rtc_mp.remove_peer(id)
