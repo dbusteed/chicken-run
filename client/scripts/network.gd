@@ -163,7 +163,7 @@ func _create_peer(id):
 			{
 				"urls": ["turn:45.79.192.191:3478"],
 				"username": "davis",
-				"password": "bananajammaramram",
+				"credential": "bananajammaramram",
 			}
 		]
 	})
