@@ -32,10 +32,11 @@ theme_override_font_sizes/font_size = 28
 text = "3:00"
 
 [node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("1_qugax")]
-custom_minimum_size = Vector2(200, 200)
-offset_top = -250.0
-offset_right = 250.0
+custom_minimum_size = Vector2(400, 400)
+offset_top = -200.0
+offset_right = 200.0
 offset_bottom = 0.0
+joystick_mode = 1
 visibility_mode = 1
 action_left = "left"
 action_right = "right"
@@ -105,7 +106,7 @@ position = Vector2(490, 787)
 position = Vector2(1878, 796)
 
 [node name="Marker2D6" type="Marker2D" parent="ItSpawns"]
-position = Vector2(1192, 73)
+position = Vector2(1190, 99)
 
 [node name="Marker2D7" type="Marker2D" parent="ItSpawns"]
 position = Vector2(1181, 1378)
@@ -125,7 +126,7 @@ position = Vector2(2270, 45)
 position = Vector2(2272, 1496)
 
 [node name="Marker2D8" type="Marker2D" parent="NotItSpawns"]
-position = Vector2(58, 1491)
+position = Vector2(39, 1486)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)

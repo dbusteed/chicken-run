@@ -1,7 +1,7 @@
 extends Node2D
 
 var countdown: int
-var game_seconds: int = 10
+var game_seconds: int = 60
 var playing := true
 
 
