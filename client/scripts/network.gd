@@ -201,7 +201,7 @@ func _lobby_sealed():
 
 
 func _disconnected():
-	#print("Disconnected: %d: %s" % [code, reason])
+	print("Disconnected: %d: %s" % [code, reason])
 	if not sealed:
 		stop() # Unexpected disconnect
 

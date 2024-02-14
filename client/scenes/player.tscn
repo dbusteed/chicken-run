@@ -1,11 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://0betdfwmr3ni"]
+[gd_scene load_steps=7 format=3 uid="uid://0betdfwmr3ni"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o5q7c"]
 [ext_resource type="Texture2D" uid="uid://nuui48600sy" path="res://textures/chicken.png" id="2_iqfxx"]
 [ext_resource type="Texture2D" uid="uid://31ixtibrpqb0" path="res://textures/dog.png" id="3_w3v4s"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mxn10"]
+radius = 23.0034
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_85gjg"]
-radius = 22.0
+radius = 21.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ak5rs"]
 properties/0/path = NodePath(".:position")
@@ -33,8 +36,18 @@ position = Vector2(0, -5.89)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("3_w3v4s")
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -0.605)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mxn10")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.605)
 shape = SubResource("CircleShape2D_85gjg")
+debug_color = Color(0.94902, 0.0745098, 0.521569, 0.419608)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ak5rs")

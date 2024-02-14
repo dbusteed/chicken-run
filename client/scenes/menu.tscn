@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ruw6givpg80g"]
+[gd_scene load_steps=8 format=3 uid="uid://ruw6givpg80g"]
 
 [ext_resource type="Theme" uid="uid://bij6e3e1nns4d" path="res://resources/ui_theme.tres" id="1_u31mc"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_6sr3r"]
-[ext_resource type="FontFile" uid="uid://bcmn8vosiojkq" path="res://fonts/namecat/Namecat.ttf" id="3_kwk8c"]
+[ext_resource type="Texture2D" uid="uid://c5dle2sg3x0vl" path="res://textures/Screenshot_2024-02-14_14-32-36.png" id="3_aort5"]
+[ext_resource type="Texture2D" uid="uid://nuui48600sy" path="res://textures/chicken.png" id="3_gkpdo"]
+[ext_resource type="Texture2D" uid="uid://31ixtibrpqb0" path="res://textures/dog.png" id="4_0q6t3"]
+[ext_resource type="FontFile" uid="uid://dbn5r4fk1avnx" path="res://fonts/eazy_chat/Eazy Chat.ttf" id="4_22fyg"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ysg73"]
 color = Color(0, 0, 0, 0)
@@ -17,140 +20,205 @@ grow_vertical = 2
 theme = ExtResource("1_u31mc")
 script = ExtResource("2_6sr3r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_aort5")
+
+[node name="Login" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.537255, 0.6, 0.560784, 1)
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 120
 
-[node name="Login" type="MarginContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="Login"]
+layout_mode = 2
+color = Color(0.729412, 0.737255, 0.756863, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Login/ColorRect"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -107.5
-offset_top = -95.0
-offset_right = 107.5
-offset_bottom = 95.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Login"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Login/ColorRect/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
+alignment = 1
 
-[node name="BigText" type="Label" parent="Login/VBoxContainer"]
+[node name="BigText" type="Label" parent="Login/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_kwk8c")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_22fyg")
 theme_override_font_sizes/font_size = 72
 text = "CHICKEN RUN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator2" type="HSeparator" parent="Login/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Login/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="MarginContainer" type="MarginContainer" parent="Login/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Login/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Login/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Login/ColorRect/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Name" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Name" type="LineEdit" parent="Login/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "name"
 alignment = 1
 
-[node name="GameCode" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="GameCode" type="LineEdit" parent="Login/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "game code"
 alignment = 1
 
-[node name="WebsocketURL" type="LineEdit" parent="Login/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="WebsocketURL" type="LineEdit" parent="Login/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "wss://chicken-run.mine.bz"
 placeholder_text = "server url"
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Login/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Login/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Login/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Login/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Create" type="Button" parent="Login/VBoxContainer/HBoxContainer"]
+[node name="Create" type="Button" parent="Login/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 30
 text = "CREATE / JOIN"
 
-[node name="Settings" type="Button" parent="Login/VBoxContainer/HBoxContainer"]
+[node name="Settings" type="Button" parent="Login/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "SETTINGS"
 
 [node name="Lobby" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -28.5
-offset_right = 46.0
-offset_bottom = 28.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 80
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Lobby"]
+[node name="ColorRect" type="ColorRect" parent="Lobby"]
+layout_mode = 2
+color = Color(0.729412, 0.737255, 0.756863, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Lobby/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/ColorRect/MarginContainer"]
 layout_mode = 2
 
-[node name="LobbyCode" type="Label" parent="Lobby/VBoxContainer"]
+[node name="LobbyCode" type="Label" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_kwk8c")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_22fyg")
 theme_override_font_sizes/font_size = 72
 text = "game:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Lobby/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="ItemList" type="ItemList" parent="Lobby/VBoxContainer"]
+[node name="ItemList" type="ItemList" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 auto_height = true
 icon_scale = 0.15
 
-[node name="HSeparator2" type="HSeparator" parent="Lobby/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="StartGame" type="Button" parent="Lobby/VBoxContainer"]
+[node name="StartGame" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-disabled = true
+theme_override_font_sizes/font_size = 30
 text = "START GAME"
 
-[connection signal="pressed" from="Login/VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
-[connection signal="item_clicked" from="Lobby/VBoxContainer/ItemList" to="." method="_on_item_list_item_clicked"]
-[connection signal="pressed" from="Lobby/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[node name="NonHostMessage" type="Label" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+text = "waiting for host to start game..."
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="LeaveLobby" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "LEAVE LOBBY"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 40.0
+offset_right = 191.0
+offset_bottom = 185.0
+texture = ExtResource("3_gkpdo")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 959.0
+offset_top = 432.0
+offset_right = 1088.0
+offset_bottom = 589.0
+texture = ExtResource("4_0q6t3")
+
+[connection signal="pressed" from="Login/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
+[connection signal="item_clicked" from="Lobby/ColorRect/MarginContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_clicked"]
+[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/LeaveLobby" to="." method="_on_leave_lobby_pressed"]
