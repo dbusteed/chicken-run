@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ruw6givpg80g"]
+[gd_scene load_steps=9 format=3 uid="uid://ruw6givpg80g"]
 
 [ext_resource type="Theme" uid="uid://bij6e3e1nns4d" path="res://resources/ui_theme.tres" id="1_u31mc"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_6sr3r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://nuui48600sy" path="res://textures/chicken.png" id="3_gkpdo"]
 [ext_resource type="Texture2D" uid="uid://31ixtibrpqb0" path="res://textures/dog.png" id="4_0q6t3"]
 [ext_resource type="FontFile" uid="uid://dbn5r4fk1avnx" path="res://fonts/eazy_chat/Eazy Chat.ttf" id="4_22fyg"]
+[ext_resource type="Script" path="res://scripts/settings.gd" id="5_0hjro"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ysg73"]
 color = Color(0, 0, 0, 0)
@@ -32,6 +33,7 @@ grow_vertical = 2
 texture = ExtResource("3_aort5")
 
 [node name="Login" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,11 +182,6 @@ layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="StartGame" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "START GAME"
-
 [node name="NonHostMessage" type="Label" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -197,10 +194,179 @@ layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
 
-[node name="LeaveLobby" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Lobby/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="StartGame" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "START GAME"
+
+[node name="SettingsBtn" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SETTINGS"
+
+[node name="LeaveLobby" type="Button" parent="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "LEAVE LOBBY"
+
+[node name="Settings" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 80
+script = ExtResource("5_0hjro")
+
+[node name="C" type="ColorRect" parent="Settings"]
+layout_mode = 2
+color = Color(0.729412, 0.737255, 0.756863, 1)
+
+[node name="M" type="MarginContainer" parent="Settings/C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+
+[node name="V" type="VBoxContainer" parent="Settings/C/M"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_22fyg")
+theme_override_font_sizes/font_size = 72
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="H1" type="HBoxContainer" parent="Settings/C/M/V"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/C/M/V/H1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Bots:"
+
+[node name="Bots" type="OptionButton" parent="Settings/C/M/V/H1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 24
+item_count = 6
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Auto"
+popup/item_1/id = 1
+popup/item_2/text = "1"
+popup/item_2/id = 2
+popup/item_3/text = "2"
+popup/item_3/id = 3
+popup/item_4/text = "3"
+popup/item_4/id = 4
+popup/item_5/text = "4"
+popup/item_5/id = 5
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="H2" type="HBoxContainer" parent="Settings/C/M/V"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/C/M/V/H2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Chicken Speed: "
+
+[node name="Speed" type="OptionButton" parent="Settings/C/M/V/H2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 24
+item_count = 6
+selected = 0
+popup/item_0/text = "Auto"
+popup/item_0/id = 0
+popup/item_1/text = "Very Slow"
+popup/item_1/id = 1
+popup/item_2/text = "Slow"
+popup/item_2/id = 2
+popup/item_3/text = "Normal"
+popup/item_3/id = 3
+popup/item_4/text = "Fast"
+popup/item_4/id = 4
+popup/item_5/text = "Very Fast"
+popup/item_5/id = 5
+
+[node name="HSeparator4" type="HSeparator" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="H3" type="HBoxContainer" parent="Settings/C/M/V"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings/C/M/V/H3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Game Time:"
+
+[node name="GameTime" type="OptionButton" parent="Settings/C/M/V/H3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_font_sizes/font_size = 24
+item_count = 3
+selected = 1
+popup/item_0/text = "0:30"
+popup/item_0/id = 0
+popup/item_1/text = "1:00"
+popup/item_1/id = 1
+popup/item_2/text = "2:00"
+popup/item_2/id = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxLine_ysg73")
+
+[node name="Back" type="Button" parent="Settings/C/M/V"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "BACK"
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -220,5 +386,10 @@ texture = ExtResource("4_0q6t3")
 
 [connection signal="pressed" from="Login/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Create" to="." method="_on_create_pressed"]
 [connection signal="item_clicked" from="Lobby/ColorRect/MarginContainer/VBoxContainer/ItemList" to="." method="_on_item_list_item_clicked"]
-[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/LeaveLobby" to="." method="_on_leave_lobby_pressed"]
+[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="Lobby/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/LeaveLobby" to="." method="_on_leave_lobby_pressed"]
+[connection signal="item_selected" from="Settings/C/M/V/H1/Bots" to="Settings" method="_on_bots_item_selected"]
+[connection signal="item_selected" from="Settings/C/M/V/H2/Speed" to="Settings" method="_on_speed_item_selected"]
+[connection signal="item_selected" from="Settings/C/M/V/H3/GameTime" to="Settings" method="_on_game_time_item_selected"]
+[connection signal="pressed" from="Settings/C/M/V/Back" to="." method="_on_back_pressed"]

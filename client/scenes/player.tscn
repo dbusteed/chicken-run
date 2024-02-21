@@ -52,3 +52,5 @@ debug_color = Color(0.94902, 0.0745098, 0.521569, 0.419608)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ak5rs")
 public_visibility = false
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

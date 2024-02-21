@@ -3,7 +3,7 @@
 # IN PROGRESS!
 
 apt-get update && apt-get upgrade -y
-apt-get install nginx -y
+apt-get install nginx coturn -y
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 certbot --nginx  # needs input!
@@ -19,4 +19,5 @@ export PATH=$PATH:/root/node/bin
 git clone https://github.com/dbusteed/chicken-run
 cd chicken-run/server
 npm i
+
 

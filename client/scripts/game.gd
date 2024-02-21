@@ -1,12 +1,15 @@
 extends Node2D
 
 var countdown: int
-var game_seconds: int = 60
+var game_seconds: int
 var playing := true
 
 
 func _ready():
 	countdown = 3
+	game_seconds = get_tree().root.get_node('/root/Menu/Settings').game_time
+	
+	$CanvasLayer.show()
 	$CountdownTimer.start(1)
 	$CanvasLayer/Countdown.text = str(countdown)
 	$CanvasLayer/Clock.text = "%d:%02d" % [(game_seconds / 60), (game_seconds % 60)]
@@ -28,6 +31,10 @@ func _on_timer_timeout():
 		$CanvasLayer/Countdown.hide()
 		$GameTimer.start(1)
 		get_node("Players/" + str(multiplayer.get_unique_id())).playing = true
+		if multiplayer.get_unique_id() == 1:
+			for p in get_node("Players").get_children():
+				if p.name.begins_with('BOT'):
+					p.playing = true
 			
 	else:
 		$CountdownTimer.start(1)
@@ -40,6 +47,8 @@ func _on_game_timer_timeout():
 		$CanvasLayer/Gray.show()
 		$CanvasLayer/Message.text = "Chicken Wins!"
 		$CanvasLayer/Message.show()
+		for player in get_node("Players").get_children():
+			player.playing = false
 		get_node("Players/" + str(multiplayer.get_unique_id())).playing = false
 		$EndGameTimer.start(3)
 	
@@ -58,8 +67,9 @@ func on_chicken_caught_rpc():
 	$CanvasLayer/Gray.show()
 	$CanvasLayer/Message.text = "Dogs Win!"
 	$CanvasLayer/Message.show()
-	get_node("Players/" + str(multiplayer.get_unique_id())).playing = false
-	$EndGameTimer.start(3)
+	for player in get_node("Players").get_children():
+		player.playing = false
+	$EndGameTimer.start(4)
 
 
 func _on_end_game_timer_timeout():
