@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://0betdfwmr3ni"]
+[gd_scene load_steps=8 format=3 uid="uid://0betdfwmr3ni"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_o5q7c"]
 [ext_resource type="Texture2D" uid="uid://nuui48600sy" path="res://textures/chicken.png" id="2_iqfxx"]
 [ext_resource type="Texture2D" uid="uid://31ixtibrpqb0" path="res://textures/dog.png" id="3_w3v4s"]
+[ext_resource type="Theme" uid="uid://bij6e3e1nns4d" path="res://resources/ui_theme.tres" id="4_ndbt2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mxn10"]
 radius = 23.0034
@@ -54,3 +55,14 @@ replication_config = SubResource("SceneReplicationConfig_ak5rs")
 public_visibility = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -23.0
+offset_top = -43.0
+offset_right = 23.0
+offset_bottom = -25.0
+theme = ExtResource("4_ndbt2")
+text = "NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
