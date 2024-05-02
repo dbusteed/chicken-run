@@ -33,7 +33,6 @@ grow_vertical = 2
 texture = ExtResource("3_aort5")
 
 [node name="Login" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

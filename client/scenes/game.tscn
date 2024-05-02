@@ -32,7 +32,6 @@ theme_override_font_sizes/font_size = 28
 text = "3:00"
 
 [node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("1_qugax")]
-visible = false
 custom_minimum_size = Vector2(400, 400)
 offset_top = -200.0
 offset_right = 200.0

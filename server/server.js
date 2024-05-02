@@ -50,7 +50,6 @@ function randomSecret() {
 	for (let i = 0; i < 1; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	return 'A';
 	return out;
 }
 

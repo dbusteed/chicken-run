@@ -3,10 +3,7 @@
 An asymmetric multiplayer game built with Godot and WebRTC.
 
 TODO
-- networking?
-  - iphone on WASM having issues
-  - so iphone native? still could use WebRTC for networking,
-  - or could look at ENET
+- networking
 - improve mobile controls
 - AI skill level
   - levels
@@ -18,3 +15,4 @@ TODO
 - player labels over characters
 - different dog colors
 - more distinctive maps
+- options for choosing ws_url and turn server
