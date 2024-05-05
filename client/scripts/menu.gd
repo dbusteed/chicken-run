@@ -99,7 +99,7 @@ func setup_game():
 		var spawn
 		
 		var speed_adj = get_tree().root.get_node("/root/Menu/Settings").speed_adj
-				
+		
 		var player_scene = load("res://scenes/player.tscn")
 		for pid in players:
 			player = player_scene.instantiate()
@@ -110,7 +110,7 @@ func setup_game():
 			else:
 				spawn = spawns.pop_front()
 			get_tree().get_root().get_node("/root/Game/Players").add_child(player, true)
-			player.init.rpc_id(pid, spawn, it, false, speed_adj)
+			player.init.rpc_id(pid, spawn, players[pid].name, it, false, speed_adj)
 			game.setup_camera.rpc_id(pid, it)
 
 		var bot_setting_drp = get_tree().get_root().get_node("/root/Menu/Settings/C/M/V/H1/Bots")
@@ -130,7 +130,7 @@ func setup_game():
 			player.name = str('BOT') + str(n)
 			spawn = spawns.pop_front()
 			get_tree().get_root().get_node("/root/Game/Players").add_child(player, true)
-			player.init.rpc_id(1, spawn, false, true, 0.0)
+			player.init.rpc_id(1, spawn, 'BOT ' + str(n), false, true, 0.0)
 			n += 1
 
 

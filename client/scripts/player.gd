@@ -18,9 +18,10 @@ func _enter_tree():
 
 
 @rpc("call_local", "any_peer")
-func init(pos: Vector2, it: bool, bot_: bool, it_speed_adj: float):
+func init(pos: Vector2, nom: String, it: bool, bot_: bool, it_speed_adj: float):
 	global_position = pos
 	bot = bot_
+	$Label.text = nom
 	
 	if it:
 		$Chicken.show()

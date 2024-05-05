@@ -89,6 +89,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "name"
 alignment = 1
+max_length = 12
 
 [node name="GameCode" type="LineEdit" parent="Login/ColorRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -33,8 +33,7 @@ text = "3:00"
 
 [node name="Virtual Joystick" parent="CanvasLayer" instance=ExtResource("1_qugax")]
 custom_minimum_size = Vector2(400, 400)
-offset_top = -200.0
-offset_right = 200.0
+offset_top = -300.0
 offset_bottom = 0.0
 joystick_mode = 1
 visibility_mode = 1
@@ -42,6 +41,7 @@ action_left = "left"
 action_right = "right"
 action_up = "up"
 action_down = "down"
+metadata/_edit_use_anchors_ = true
 
 [node name="Countdown" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
@@ -137,6 +137,77 @@ one_shot = true
 one_shot = true
 
 [node name="EndGameTimer" type="Timer" parent="."]
+
+[node name="49" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 201.0
+offset_top = 260.0
+offset_right = 446.0
+offset_bottom = 375.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "OUT
+HOUSE"
+
+[node name="48" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 297.0
+offset_top = 1006.0
+offset_right = 427.0
+offset_bottom = 1062.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "BARN"
+
+[node name="54" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 909.0
+offset_top = 1340.0
+offset_right = 1118.0
+offset_bottom = 1396.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "STORAGE"
+
+[node name="50" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 1797.0
+offset_top = 1008.0
+offset_right = 2042.0
+offset_bottom = 1064.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "BIG HOUSE"
+
+[node name="53" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 703.0
+offset_top = 290.0
+offset_right = 1032.0
+offset_bottom = 346.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "SMALL HOUSE"
+
+[node name="52" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 935.0
+offset_top = 773.0
+offset_right = 1185.0
+offset_bottom = 829.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "SHED"
+
+[node name="51" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 1918.0
+offset_top = 133.0
+offset_right = 2168.0
+offset_bottom = 189.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "OLD SHED"
 
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
