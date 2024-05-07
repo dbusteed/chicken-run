@@ -4,3 +4,4 @@
 node_modules/
 ios/
 
+run_exports.sh
