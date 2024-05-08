@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2vbly6ninwa"]
+[gd_scene load_steps=6 format=3 uid="uid://b2vbly6ninwa"]
 
 [ext_resource type="Theme" uid="uid://bij6e3e1nns4d" path="res://resources/ui_theme.tres" id="1_d0ipn"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_eptyj"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://scenes/virtual_joystick.tscn" id="1_qugax"]
 [ext_resource type="TileSet" uid="uid://yr1nmpv5no11" path="res://resources/tileset.tres" id="4_ufntm"]
+[ext_resource type="Texture2D" uid="uid://ulj3gr5turtq" path="res://textures/joystick_tip.png" id="4_xey7k"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_eptyj")
@@ -35,13 +36,15 @@ text = "3:00"
 custom_minimum_size = Vector2(400, 400)
 offset_top = -300.0
 offset_bottom = 0.0
-joystick_mode = 1
 visibility_mode = 1
 action_left = "left"
 action_right = "right"
 action_up = "up"
 action_down = "down"
 metadata/_edit_use_anchors_ = true
+
+[node name="Tip" parent="CanvasLayer/Virtual Joystick/Base" index="0"]
+texture = ExtResource("4_xey7k")
 
 [node name="Countdown" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
@@ -79,6 +82,79 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 96
+
+[node name="LocationsLabels" type="Node" parent="."]
+
+[node name="49" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 201.0
+offset_top = 260.0
+offset_right = 446.0
+offset_bottom = 375.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "OUT
+HOUSE"
+
+[node name="48" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 297.0
+offset_top = 1006.0
+offset_right = 427.0
+offset_bottom = 1062.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "BARN"
+
+[node name="54" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 909.0
+offset_top = 1340.0
+offset_right = 1118.0
+offset_bottom = 1396.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "STORAGE"
+
+[node name="50" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 1797.0
+offset_top = 1008.0
+offset_right = 2047.0
+offset_bottom = 1064.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "BIG HOUSE"
+
+[node name="53" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 703.0
+offset_top = 290.0
+offset_right = 1032.0
+offset_bottom = 346.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "SMALL HOUSE"
+
+[node name="52" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 935.0
+offset_top = 773.0
+offset_right = 1185.0
+offset_bottom = 829.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "SHED"
+
+[node name="51" type="Label" parent="LocationsLabels"]
+modulate = Color(1, 1, 1, 0.392157)
+offset_left = 1918.0
+offset_top = 133.0
+offset_right = 2168.0
+offset_bottom = 189.0
+theme = ExtResource("1_d0ipn")
+theme_override_font_sizes/font_size = 52
+text = "OLD SHED"
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("4_ufntm")
@@ -138,77 +214,8 @@ one_shot = true
 
 [node name="EndGameTimer" type="Timer" parent="."]
 
-[node name="49" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 201.0
-offset_top = 260.0
-offset_right = 446.0
-offset_bottom = 375.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "OUT
-HOUSE"
-
-[node name="48" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 297.0
-offset_top = 1006.0
-offset_right = 427.0
-offset_bottom = 1062.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "BARN"
-
-[node name="54" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 909.0
-offset_top = 1340.0
-offset_right = 1118.0
-offset_bottom = 1396.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "STORAGE"
-
-[node name="50" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 1797.0
-offset_top = 1008.0
-offset_right = 2042.0
-offset_bottom = 1064.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "BIG HOUSE"
-
-[node name="53" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 703.0
-offset_top = 290.0
-offset_right = 1032.0
-offset_bottom = 346.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "SMALL HOUSE"
-
-[node name="52" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 935.0
-offset_top = 773.0
-offset_right = 1185.0
-offset_bottom = 829.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "SHED"
-
-[node name="51" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0.392157)
-offset_left = 1918.0
-offset_top = 133.0
-offset_right = 2168.0
-offset_bottom = 189.0
-theme = ExtResource("1_d0ipn")
-theme_override_font_sizes/font_size = 52
-text = "OLD SHED"
-
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
 [connection signal="timeout" from="EndGameTimer" to="." method="_on_end_game_timer_timeout"]
+
+[editable path="CanvasLayer/Virtual Joystick"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv4e71pfdy6mh"]
+
+[ext_resource type="Texture2D" uid="uid://dohusjldnpeyf" path="res://textures/joystick_base_outline.png" id="1_o3d13"]
+[ext_resource type="Texture2D" uid="uid://ulj3gr5turtq" path="res://textures/joystick_tip.png" id="2_srfwg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2vo0"]
+radius = 95.0
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-14, 6)
+
+[node name="JoystickBaseOutline" type="Sprite2D" parent="."]
+position = Vector2(201, 455)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("1_o3d13")
+
+[node name="JoystickTip" type="Sprite2D" parent="JoystickBaseOutline"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_srfwg")
+
+[node name="Area2D" type="Area2D" parent="JoystickBaseOutline"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JoystickBaseOutline/Area2D"]
+position = Vector2(0, -0.833333)
+shape = SubResource("CircleShape2D_a2vo0")
