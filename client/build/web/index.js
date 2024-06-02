@@ -8153,6 +8153,22 @@ function dbg(text) {
       GLctx.compressedTexImage2D(target, level, internalFormat, width, height, border, data ? HEAPU8.subarray((data), (data+imageSize)) : null);
     };
 
+  var _glCompressedTexImage3D = (target, level, internalFormat, width, height, depth, border, imageSize, data) => {
+      if (GLctx.currentPixelUnpackBufferBinding) {
+        GLctx.compressedTexImage3D(target, level, internalFormat, width, height, depth, border, imageSize, data);
+      } else {
+        GLctx.compressedTexImage3D(target, level, internalFormat, width, height, depth, border, HEAPU8, data, imageSize);
+      }
+    };
+
+  var _glCompressedTexSubImage3D = (target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) => {
+      if (GLctx.currentPixelUnpackBufferBinding) {
+        GLctx.compressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
+      } else {
+        GLctx.compressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, HEAPU8, data, imageSize);
+      }
+    };
+
   function _glCopyBufferSubData(x0, x1, x2, x3, x4) { GLctx.copyBufferSubData(x0, x1, x2, x3, x4) }
 
   var _glCreateProgram = () => {
@@ -9340,7 +9356,7 @@ function dbg(text) {
   
   var GodotRuntime = {
   get_func:function (ptr) {
-  			return wasmTable.get(ptr); // eslint-disable-line no-undef
+  			return wasmTable.get(ptr);
   		},
   error:function () {
   			err.apply(null, Array.from(arguments)); // eslint-disable-line no-undef
@@ -9349,16 +9365,16 @@ function dbg(text) {
   			out.apply(null, Array.from(arguments)); // eslint-disable-line no-undef
   		},
   malloc:function (p_size) {
-  			return _malloc(p_size); // eslint-disable-line no-undef
+  			return _malloc(p_size);
   		},
   free:function (p_ptr) {
-  			_free(p_ptr); // eslint-disable-line no-undef
+  			_free(p_ptr);
   		},
   getHeapValue:function (p_ptr, p_type) {
-  			return getValue(p_ptr, p_type); // eslint-disable-line no-undef
+  			return getValue(p_ptr, p_type);
   		},
   setHeapValue:function (p_ptr, p_value, p_type) {
-  			setValue(p_ptr, p_value, p_type); // eslint-disable-line no-undef
+  			setValue(p_ptr, p_value, p_type);
   		},
   heapSub:function (p_heap, p_ptr, p_len) {
   			const bytes = p_heap.BYTES_PER_ELEMENT;
@@ -9373,7 +9389,7 @@ function dbg(text) {
   			return p_dst.set(p_src, p_ptr / bytes);
   		},
   parseString:function (p_ptr) {
-  			return UTF8ToString(p_ptr); // eslint-disable-line no-undef
+  			return UTF8ToString(p_ptr);
   		},
   parseStringArray:function (p_ptr, p_size) {
   			const strings = [];
@@ -9384,12 +9400,12 @@ function dbg(text) {
   			return strings;
   		},
   strlen:function (p_str) {
-  			return lengthBytesUTF8(p_str); // eslint-disable-line no-undef
+  			return lengthBytesUTF8(p_str);
   		},
   allocString:function (p_str) {
   			const length = GodotRuntime.strlen(p_str) + 1;
   			const c_str = GodotRuntime.malloc(length);
-  			stringToUTF8(p_str, c_str, length); // eslint-disable-line no-undef
+  			stringToUTF8(p_str, c_str, length);
   			return c_str;
   		},
   allocStringArray:function (p_strings) {
@@ -9407,7 +9423,7 @@ function dbg(text) {
   			GodotRuntime.free(p_ptr);
   		},
   stringToHeap:function (p_str, p_ptr, p_len) {
-  			return stringToUTF8Array(p_str, HEAP8, p_ptr, p_len); // eslint-disable-line no-undef
+  			return stringToUTF8Array(p_str, HEAP8, p_ptr, p_len);
   		},
   };
   
@@ -9434,7 +9450,7 @@ function dbg(text) {
   			}
   		},
   locate_file:function (file) {
-  			return Module['locateFile'](file); // eslint-disable-line no-undef
+  			return Module['locateFile'](file);
   		},
   clear:function () {
   			GodotConfig.canvas = null;
@@ -10042,7 +10058,7 @@ function dbg(text) {
   			return 0;
   		},
   _updateGL:function () {
-  			const gl_context_handle = _emscripten_webgl_get_current_context(); // eslint-disable-line no-undef
+  			const gl_context_handle = _emscripten_webgl_get_current_context();
   			const gl = GL.getContext(gl_context_handle);
   			if (gl) {
   				GL.resizeOffscreenFramebuffer(gl);
@@ -11062,8 +11078,15 @@ function dbg(text) {
   		},
   ime_position:function (x, y) {
   			if (GodotIME.ime) {
-  				GodotIME.ime.style.left = `${x}px`;
-  				GodotIME.ime.style.top = `${y}px`;
+  				const canvas = GodotConfig.canvas;
+  				const rect = canvas.getBoundingClientRect();
+  				const rw = canvas.width / rect.width;
+  				const rh = canvas.height / rect.height;
+  				const clx = (x / rw) + rect.x;
+  				const cly = (y / rh) + rect.y;
+  
+  				GodotIME.ime.style.left = `${clx}px`;
+  				GodotIME.ime.style.top = `${cly}px`;
   			}
   		},
   init:function (ime_cb, key_cb, code, key) {
@@ -11097,10 +11120,12 @@ function dbg(text) {
   			ime.style.background = 'none';
   			ime.style.opacity = 0.0;
   			ime.style.position = 'fixed';
+  			ime.style.textAlign = 'left';
+  			ime.style.fontSize = '1px';
   			ime.style.left = '0px';
   			ime.style.top = '0px';
-  			ime.style.width = '2px';
-  			ime.style.height = '2px';
+  			ime.style.width = '100%';
+  			ime.style.height = '40px';
   			ime.style.display = 'none';
   			ime.contentEditable = 'true';
   
@@ -11891,19 +11916,19 @@ function dbg(text) {
   		const func = GodotRuntime.get_func(p_callback);
   
   		function listener_end(evt) {
-  			evt.currentTarget.cb(1 /*TTS_UTTERANCE_ENDED*/, evt.currentTarget.id, 0);
+  			evt.currentTarget.cb(1 /* TTS_UTTERANCE_ENDED */, evt.currentTarget.id, 0);
   		}
   
   		function listener_start(evt) {
-  			evt.currentTarget.cb(0 /*TTS_UTTERANCE_STARTED*/, evt.currentTarget.id, 0);
+  			evt.currentTarget.cb(0 /* TTS_UTTERANCE_STARTED */, evt.currentTarget.id, 0);
   		}
   
   		function listener_error(evt) {
-  			evt.currentTarget.cb(2 /*TTS_UTTERANCE_CANCELED*/, evt.currentTarget.id, 0);
+  			evt.currentTarget.cb(2 /* TTS_UTTERANCE_CANCELED */, evt.currentTarget.id, 0);
   		}
   
   		function listener_bound(evt) {
-  			evt.currentTarget.cb(3 /*TTS_UTTERANCE_BOUNDARY*/, evt.currentTarget.id, evt.charIndex);
+  			evt.currentTarget.cb(3 /* TTS_UTTERANCE_BOUNDARY */, evt.currentTarget.id, evt.charIndex);
   		}
   
   		const utterance = new SpeechSynthesisUtterance(GodotRuntime.parseString(p_text));
@@ -12356,7 +12381,7 @@ function dbg(text) {
   
   
   function _godot_webgl2_glGetBufferSubData(target, offset, size, data) {
-  		const gl_context_handle = _emscripten_webgl_get_current_context(); // eslint-disable-line no-undef
+  		const gl_context_handle = _emscripten_webgl_get_current_context();
   		const gl = GL.getContext(gl_context_handle);
   		if (gl) {
   			gl.GLctx['getBufferSubData'](target, offset, HEAPU8, data, size);
@@ -12402,7 +12427,8 @@ function dbg(text) {
   				GodotWebXR.orig_requestAnimationFrame = Browser.requestAnimationFrame;
   			}
   			Browser.requestAnimationFrame = enable
-  				? GodotWebXR.requestAnimationFrame : GodotWebXR.orig_requestAnimationFrame;
+  				? GodotWebXR.requestAnimationFrame
+  				: GodotWebXR.orig_requestAnimationFrame;
   		},
   pauseResumeMainLoop:() => {
   			// Once both GodotWebXR.session and GodotWebXR.space are set or
@@ -12411,9 +12437,9 @@ function dbg(text) {
   			// gets picked up automatically, however, in the Oculus Browser
   			// on the Quest, we need to pause and resume the main loop.
   			Browser.mainLoop.pause();
-  			runtimeKeepalivePush(); // eslint-disable-line no-undef
+  			runtimeKeepalivePush();
   			window.setTimeout(function () {
-  				runtimeKeepalivePop(); // eslint-disable-line no-undef
+  				runtimeKeepalivePop();
   				Browser.mainLoop.resume();
   			}, 0);
   		},
@@ -12728,12 +12754,12 @@ function dbg(text) {
   			// Store onsimpleevent so we can use it later.
   			GodotWebXR.onsimpleevent = onsimpleevent;
   
-  			const gl_context_handle = _emscripten_webgl_get_current_context(); // eslint-disable-line no-undef
+  			const gl_context_handle = _emscripten_webgl_get_current_context();
   			const gl = GL.getContext(gl_context_handle).GLctx;
   			GodotWebXR.gl = gl;
   
   			gl.makeXRCompatible().then(function () {
-  				GodotWebXR.gl_binding = new XRWebGLBinding(session, gl); // eslint-disable-line no-undef
+  				GodotWebXR.gl_binding = new XRWebGLBinding(session, gl);
   
   				// This will trigger the layer to get created.
   				GodotWebXR.getLayer();
@@ -13608,6 +13634,10 @@ var wasmImports = {
   glCompileShader: _glCompileShader,
   /** @export */
   glCompressedTexImage2D: _glCompressedTexImage2D,
+  /** @export */
+  glCompressedTexImage3D: _glCompressedTexImage3D,
+  /** @export */
+  glCompressedTexSubImage3D: _glCompressedTexSubImage3D,
   /** @export */
   glCopyBufferSubData: _glCopyBufferSubData,
   /** @export */
@@ -14684,7 +14714,7 @@ if (typeof exports === 'object' && typeof module === 'object')
 else if (typeof define === 'function' && define['amd'])
   define([], () => Godot);
 
-const Features = { // eslint-disable-line no-unused-vars
+const Features = {
 	/**
 	 * Check whether WebGL is available. Optionally, specify a particular version of WebGL to check for.
 	 *
